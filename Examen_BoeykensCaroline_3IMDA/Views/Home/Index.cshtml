@@ -1,0 +1,50 @@
+﻿@model CarListViewModel
+
+@{
+    ViewData["Title"] = "Cars";
+}
+<h2>All @ViewData["Title"]</h2>
+<h3>@ViewData["Message"]</h3>
+
+<a asp-controller="Home" asp-action="New" class="btn btn-primary">New</a>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table">
+            <thead>
+            <tr>
+                <td>Id</td>
+                <td>Type</td>
+                <td>License Plate</td>
+                <td>Owner</td>
+                <td>Color</td>
+                <td>Date</td>
+            </tr>
+            </thead>
+            @foreach (var car in Model.Cars)
+            {
+                <tr>
+                    <td>@car.Id</td>
+                    <td>@car.Cartype</td>
+                    <td>@car.LicensePlate.ToUpper()</td>
+                    <td>@car.Owner</td>
+                    <td>@car.Color</td>
+                    <td>@car.Date.ToLongDateString()</td>
+                    <td>
+                        <a asp-controller="Home" asp-action="Detail" asp-route-id="@car.Id">
+                        Edit
+                        </a>
+                    </td>
+                    <td>
+                        <a asp-controller="Home" asp-action="Delete" asp-route-id="@car.Id"
+                           onclick="$.post(this.href).success(window.location.href = '/');return false; ">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+        </table>
+
+    </div>
+   
+</div>
