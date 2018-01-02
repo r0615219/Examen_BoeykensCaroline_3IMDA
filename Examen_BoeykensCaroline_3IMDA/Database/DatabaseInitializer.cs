@@ -20,7 +20,7 @@ namespace Examen_BoeykensCaroline_3IMDA.Data
             var owners = new List<Owner>();
             for (var i = 0; i < 5; i++)
             {
-                owners.Add(new Owner {FirstName = $"Sam" + i, LastName = $"Parker" + i});
+                owners.Add(new Owner {FirstName = $"Sam", LastName = $"Parker"});
             }
             var cartypes = new List<Cartype>
             {
@@ -55,7 +55,14 @@ namespace Examen_BoeykensCaroline_3IMDA.Data
                     cartype = cartypes[3];
                 }
 
-                cars.Add(new Car { Color = $"Red" + i, LicensePlate = $"1NUL999" + i, Date = new DateTime(2002, 05, 11), Owner = new List<CarOwner>() { carOwner }, Cartype = cartype });
+                cars.Add(new Car
+                {
+                    Color = $"Red" + i,
+                    LicensePlate = $"1NUL999" + i,
+                    Date = new DateTime(2002, 05, 11),
+                    Owner = new List<CarOwner>() { carOwner },
+                    Cartype = cartype
+                });
             }
 
             entityContext.Database.EnsureCreated();

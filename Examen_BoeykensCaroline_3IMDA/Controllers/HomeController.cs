@@ -30,7 +30,7 @@ namespace Examen_BoeykensCaroline_3IMDA.Controllers
                 Date = car.Date,
                 LicensePlate = car.LicensePlate,
                 Owner = string.Join(";", car.Owner.Select(x => x.Owner.FirstName + " " + x.Owner.LastName)),
-                Cartype = car.Cartype?.Model
+                Cartype = car.Cartype?.Model,
             };
         }
 

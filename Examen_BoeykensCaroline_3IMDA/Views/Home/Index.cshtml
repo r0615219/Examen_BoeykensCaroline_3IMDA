@@ -31,7 +31,7 @@
                     <td>@car.Cartype</td>
                 }
                     <td>@car.LicensePlate.ToUpper()</td>
-                @if(@car.Owner == "" || @car.Owner == null){
+                @if(@car.Owner == "" || @car.Owner == null || @car.Owner == "No Owner"){
                     <td style="font-style: italic; color: grey">empty</td>
                 } else {
                     <td>@car.Owner</td>

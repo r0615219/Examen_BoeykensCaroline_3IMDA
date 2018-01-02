@@ -20,6 +20,12 @@
             </thead>
             @foreach (var owner in Model.Owners)
             {
+            
+            if (@owner.Id == 1)
+            {
+                  continue;
+            }
+            
                 <tr>
                     <td>@owner.Id</td>
                     <td>@owner.FirstName</td>
