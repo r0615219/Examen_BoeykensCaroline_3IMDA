@@ -115,7 +115,13 @@ namespace Examen_BoeykensCaroline_3IMDA.Controllers
                 car.Cartype = editView.CartypeId.HasValue ? _carService.GetTypeById(editView.CartypeId.Value) : null;
                 car.Date = editView.Date;
                 car.Color = editView.Color;
-                car.Owner = editView.OwnerId.HasValue ? _carService.GetOwnerById(editView.OwnerId.Value) : null;
+
+                List<CarOwner> OwnersList = new List<CarOwner>();
+                OwnersList.Add(new CarOwner() {
+                    OwnerId = _carService.GetOwnerById(editView.OwnerId.Value).Id
+                });
+                car.Owner = OwnersList;
+
                 _carService.Save(car);
                 return Redirect("/");
             }
