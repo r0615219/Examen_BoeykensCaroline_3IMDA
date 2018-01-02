@@ -1,0 +1,44 @@
+﻿@model OwnerListViewModel
+
+@{
+    ViewData["Title"] = "Owners";
+}
+<h2>All @ViewData["Title"]</h2>
+<h3>@ViewData["Message"]</h3>
+
+<a asp-controller="Owner" asp-action="New" class="btn btn-primary">New</a>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table">
+            <thead>
+            <tr>
+                <td>Id</td>
+                <td>Firstname</td>
+                <td>Lastname</td>
+            </tr>
+            </thead>
+            @foreach (var owner in Model.Owners)
+            {
+                <tr>
+                    <td>@owner.Id</td>
+                    <td>@owner.FirstName</td>
+                    <td>@owner.LastName</td>
+                    <td>
+                        <a asp-controller="Owner" asp-action="Detail" asp-route-id="@owner.Id">
+                        Edit
+                        </a>
+                    </td>
+                    <td>
+                        <a asp-controller="Owner" asp-action="Delete" asp-route-id="@owner.Id"
+                           onclick="$.post(this.href).success(window.location.href = '/Owner/Owners');return false; ">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+        </table>
+
+    </div>
+   
+</div>

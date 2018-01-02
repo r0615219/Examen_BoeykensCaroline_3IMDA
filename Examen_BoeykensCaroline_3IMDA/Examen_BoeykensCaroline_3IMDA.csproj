@@ -20,6 +20,8 @@
     <Folder Include="Entities\" />
     <Folder Include="Database\" />
     <Folder Include="Services\" />
+    <Folder Include="Views\Owner\" />
+    <Folder Include="Views\Brand\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Models\HomeController.cs" />

@@ -1,0 +1,44 @@
+﻿@model BrandListViewModel
+
+@{
+    ViewData["Title"] = "Brands";
+}
+<h2>All @ViewData["Title"]</h2>
+<h3>@ViewData["Message"]</h3>
+
+<a asp-controller="Brand" asp-action="New" class="btn btn-primary">New</a>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table">
+            <thead>
+            <tr>
+                <td>Id</td>
+                <td>Model</td>
+                <td>Brand</td>
+            </tr>
+            </thead>
+            @foreach (var cartype in Model.Brands)
+            {
+                <tr>
+                    <td>@cartype.Id</td>
+                    <td>@cartype.Model</td>
+                    <td>@cartype.Brand</td>
+                    <td>
+                        <a asp-controller="Brand" asp-action="Detail" asp-route-id="@cartype.Id">
+                        Edit
+                        </a>
+                    </td>
+                    <td>
+                        <a asp-controller="Brand" asp-action="Delete" asp-route-id="@cartype.Id"
+                           onclick="$.post(this.href).success(window.location.href = '/Brand/Brands');return false; ">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+        </table>
+
+    </div>
+   
+</div>

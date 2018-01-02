@@ -25,9 +25,17 @@
             {
                 <tr>
                     <td>@car.Id</td>
+                @if(@car.Cartype == "" || @car.Cartype == null){
+                    <td style="font-style: italic; color: grey">empty</td>
+                } else {
                     <td>@car.Cartype</td>
+                }
                     <td>@car.LicensePlate.ToUpper()</td>
+                @if(@car.Owner == "" || @car.Owner == null){
+                    <td style="font-style: italic; color: grey">empty</td>
+                } else {
                     <td>@car.Owner</td>
+                }
                     <td>@car.Color</td>
                     <td>@car.Date.ToLongDateString()</td>
                     <td>

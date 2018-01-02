@@ -18,20 +18,20 @@ namespace Examen_BoeykensCaroline_3IMDA.Data
             }
 
             var owners = new List<Owner>();
-            for (var i = 0; i < 12; i++)
+            for (var i = 0; i < 5; i++)
             {
-                owners.Add(new Owner {FirstName = $"Sam", LastName = $"Parker"});
+                owners.Add(new Owner {FirstName = $"Sam" + i, LastName = $"Parker" + i});
             }
-
             var cartypes = new List<Cartype>
             {
                 new Cartype() {Brand = "Volkswagen", Model = "Golf IV"},
                 new Cartype() {Brand = "Jeep", Model = "L200"},
-                new Cartype() {Brand = "Skoda", Model = "superb"}
+                new Cartype() {Brand = "Skoda", Model = "Superb"},
+                new Cartype() {Brand = "Volkswagen", Model = "Fox"}
             };
 
             var cars = new List<Car>();
-            for (var i = 0; i < 12; i++)
+            for (var i = 0; i < 5; i++)
             {
                 var carOwner = new CarOwner()
                 {
@@ -51,8 +51,11 @@ namespace Examen_BoeykensCaroline_3IMDA.Data
                 {
                     cartype = cartypes[2];
                 }
+                else {
+                    cartype = cartypes[3];
+                }
 
-                cars.Add(new Car { Color = $"Red", LicensePlate = $"1NPD999", Date = new DateTime(2002, 05, 11), Owner = new List<CarOwner>() { carOwner }, Cartype = cartype });
+                cars.Add(new Car { Color = $"Red" + i, LicensePlate = $"1NUL999" + i, Date = new DateTime(2002, 05, 11), Owner = new List<CarOwner>() { carOwner }, Cartype = cartype });
             }
 
             entityContext.Database.EnsureCreated();

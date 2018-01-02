@@ -1,0 +1,38 @@
+﻿@model OwnerEditViewModel
+
+@{
+    ViewData["Title"] = string.IsNullOrEmpty(Model.FirstName) ? "Add New Owner" : "Changing the info for: " + Model.FirstName + " " + Model.LastName;
+}
+
+<h2>@ViewData["Title"]</h2>
+
+
+<div class="row">
+    <form asp-action="Save" asp-controller="Owner">
+        <div class="row">
+            <div class="col-lg-2">
+                <label asp-for="FirstName">Firstname:</label>
+            </div>
+            <div class="col-lg-10">
+                <input asp-for="FirstName"/>
+                <span asp-validation-for="FirstName" style="color: red"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-2">
+                <label asp-for="LastName">Lastname:</label>
+            </div>
+            <div class="col-lg-10">
+                <input asp-for="LastName"/>
+                <span asp-validation-for="LastName" style="color: red"></span>
+            </div>
+        </div>
+        
+        <div asp-validation-summary="All"></div>
+
+        <input type="hidden" asp-for="Id"/>
+        <input type="submit"/>
+    </form>
+   
+</div>

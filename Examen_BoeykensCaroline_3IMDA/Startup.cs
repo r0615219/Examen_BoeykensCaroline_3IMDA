@@ -28,6 +28,8 @@ namespace Examen_BoeykensCaroline_3IMDA
         {
             services.AddDbContext<EntityContext>(options => options.UseSqlite("Filename=./cars.db"));
             services.AddScoped<ICarService, CarService>();
+            services.AddScoped<IOwnerService, OwnerService>();
+            services.AddScoped<IBrandService, BrandService>();
             services.AddMvc();
         }
 

@@ -20,6 +20,7 @@ namespace Examen_BoeykensCaroline_3IMDA.Controllers
             _carService = carService;
         }
 
+        //INDEX LIST CARS
         protected CarDetailViewModel ConvertCarToCarDetailViewModel(Car car)
         {
             return new CarDetailViewModel()
@@ -29,7 +30,7 @@ namespace Examen_BoeykensCaroline_3IMDA.Controllers
                 Date = car.Date,
                 LicensePlate = car.LicensePlate,
                 Owner = string.Join(";", car.Owner.Select(x => x.Owner.FirstName + " " + x.Owner.LastName)),
-                Cartype = car.Cartype?.Brand
+                Cartype = car.Cartype?.Model
             };
         }
 
@@ -42,6 +43,7 @@ namespace Examen_BoeykensCaroline_3IMDA.Controllers
             return View(model);
         }
 
+        //INDEX EDIT CARS
         public CarEditViewModel ConvertCarToEditViewModel(Car car)
         {
             var editView = new CarEditViewModel
@@ -50,12 +52,11 @@ namespace Examen_BoeykensCaroline_3IMDA.Controllers
                 LicensePlate = car.LicensePlate,
                 Date = car.Date,
                 Color = car.Color,
-                Cartype = car.Cartype?.Brand,
+                Cartype = car.Cartype?.Model,
                 CartypeId = car.Cartype?.Id,
                 Owner = string.Join(";", car.Owner.Select(x => x.Owner.FirstName + " " + x.Owner.LastName)),
-                //OwnerId = car.Owner?.Select(x => x.OwnerId )
-                // - - - - - DEFAULT VALUE NEEDS FIX - - - - - - - 
-                OwnerId = '2'
+                //OwnerId = int.Parse(string.Join(";", car.Owner.Select(x => x.Owner.Id))),
+                OwnerId = car.Owner?.Select(x => x.OwnerId).FirstOrDefault(),
             };
             return editView;
         }
@@ -72,7 +73,7 @@ namespace Examen_BoeykensCaroline_3IMDA.Controllers
             var editView = ConvertCarToEditViewModel(car);
             editView.Cartypes = _carService.GetAllTypes().Select(x => new SelectListItem
             {
-                Text = x.Brand,
+                Text = x.Model,
                 Value = x.Id.ToString(),
             }
             ).ToList();
@@ -85,6 +86,7 @@ namespace Examen_BoeykensCaroline_3IMDA.Controllers
             return View(editView);
         }
 
+        [HttpGet("/Home/New")]
         public IActionResult New()
         {
             return View("Detail", new CarEditViewModel()
@@ -92,7 +94,7 @@ namespace Examen_BoeykensCaroline_3IMDA.Controllers
                 LicensePlate = null,
                 Cartypes = _carService.GetAllTypes().Select(x => new SelectListItem
                 {
-                    Text = x.Brand,
+                    Text = x.Model,
                     Value = x.Id.ToString(),
                 }).ToList(),
                 Owners = _carService.GetAllOwners().Select(x => new SelectListItem
@@ -113,9 +115,8 @@ namespace Examen_BoeykensCaroline_3IMDA.Controllers
                 car.Cartype = editView.CartypeId.HasValue ? _carService.GetTypeById(editView.CartypeId.Value) : null;
                 car.Date = editView.Date;
                 car.Color = editView.Color;
-                //car.Owner = editView.OwnerId.HasValue ? _carService.GetOwnerById(editView.OwnerId.Value) : null,
+                car.Owner = editView.OwnerId.HasValue ? _carService.GetOwnerById(editView.OwnerId.Value) : null;
                 _carService.Save(car);
-
                 return Redirect("/");
             }
             return View("Detail", editView);
@@ -132,13 +133,6 @@ namespace Examen_BoeykensCaroline_3IMDA.Controllers
         public IActionResult Brands()
         {
             ViewData["Message"] = "Brands";
-
-            return View();
-        }
-
-        public IActionResult Owners()
-        {
-            ViewData["Message"] = "Owners";
 
             return View();
         }
