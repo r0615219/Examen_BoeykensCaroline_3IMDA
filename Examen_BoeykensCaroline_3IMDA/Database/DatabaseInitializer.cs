@@ -57,8 +57,8 @@ namespace Examen_BoeykensCaroline_3IMDA.Data
 
                 cars.Add(new Car
                 {
-                    Color = $"Red" + i,
-                    LicensePlate = $"1NUL999" + i,
+                    Color = $"Red",
+                    LicensePlate = $"1NUL999",
                     Date = new DateTime(2002, 05, 11),
                     Owner = new List<CarOwner>() { carOwner },
                     Cartype = cartype

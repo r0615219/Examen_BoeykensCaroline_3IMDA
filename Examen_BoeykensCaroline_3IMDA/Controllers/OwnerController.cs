@@ -28,7 +28,8 @@ namespace Examen_BoeykensCaroline_3IMDA.Controllers
             {
                 Id = owner.Id,
                 FirstName = owner.FirstName,
-                LastName = owner.LastName
+                LastName = owner.LastName,
+                CarByOwner = _ownerService.GetAllCarsByOwner(owner.Id)
             };
         }
 

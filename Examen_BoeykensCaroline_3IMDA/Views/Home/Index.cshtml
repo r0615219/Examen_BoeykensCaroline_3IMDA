@@ -6,14 +6,14 @@
 <h2>All @ViewData["Title"]</h2>
 <h3>@ViewData["Message"]</h3>
 
-<a asp-controller="Home" asp-action="New" class="btn btn-primary">New</a>
+<a asp-controller="Home" asp-action="New" class="btn btn-primary">Add New Car</a>
 
 <div class="row">
     <div class="col-md-12">
         <table class="table">
             <thead>
             <tr>
-                <td>Id</td>
+                <td>&#35;</td>
                 <td>Type</td>
                 <td>License Plate</td>
                 <td>Owner</td>
@@ -30,13 +30,21 @@
                 } else {
                     <td>@car.Cartype</td>
                 }
-                    <td>@car.LicensePlate.ToUpper()</td>
+                @if(@car.LicensePlate == "" || @car.LicensePlate == null){
+                    <td style="font-style: italic; color: grey">empty</td>
+                } else {
+                    <td>@car.LicensePlate</td>
+                }
                 @if(@car.Owner == "" || @car.Owner == null || @car.Owner == "No Owner"){
                     <td style="font-style: italic; color: grey">empty</td>
                 } else {
                     <td>@car.Owner</td>
                 }
+                @if(@car.Color == "" || @car.Color == null){
+                    <td style="font-style: italic; color: grey">empty</td>
+                } else {
                     <td>@car.Color</td>
+                }
                     <td>@car.Date.ToLongDateString()</td>
                     <td>
                         <a asp-controller="Home" asp-action="Detail" asp-route-id="@car.Id">

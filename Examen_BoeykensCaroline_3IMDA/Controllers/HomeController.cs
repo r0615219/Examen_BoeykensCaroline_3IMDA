@@ -55,7 +55,6 @@ namespace Examen_BoeykensCaroline_3IMDA.Controllers
                 Cartype = car.Cartype?.Model,
                 CartypeId = car.Cartype?.Id,
                 Owner = string.Join(";", car.Owner.Select(x => x.Owner.FirstName + " " + x.Owner.LastName)),
-                //OwnerId = int.Parse(string.Join(";", car.Owner.Select(x => x.Owner.Id))),
                 OwnerId = car.Owner?.Select(x => x.OwnerId).FirstOrDefault(),
             };
             return editView;
@@ -108,6 +107,7 @@ namespace Examen_BoeykensCaroline_3IMDA.Controllers
         [HttpPost("/")]
         public IActionResult Save([FromForm] CarEditViewModel editView)
         {
+
             if (ModelState.IsValid)
             {
                 var car = editView.Id == 0 ? new Car() : _carService.GetCarById(editView.Id);

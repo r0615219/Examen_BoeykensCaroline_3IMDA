@@ -6,14 +6,15 @@
 <h2>All @ViewData["Title"]</h2>
 <h3>@ViewData["Message"]</h3>
 
-<a asp-controller="Owner" asp-action="New" class="btn btn-primary">New</a>
+<a asp-controller="Owner" asp-action="New" class="btn btn-primary">Add New Owner</a>
+<a asp-controller="Home" asp-action="New" class="btn btn-primary">Add New Car</a>
 
 <div class="row">
     <div class="col-md-12">
         <table class="table">
             <thead>
             <tr>
-                <td>Id</td>
+                <td>&#35;</td>
                 <td>Firstname</td>
                 <td>Lastname</td>
             </tr>
@@ -30,6 +31,7 @@
                     <td>@owner.Id</td>
                     <td>@owner.FirstName</td>
                     <td>@owner.LastName</td>
+                    <td>&nbsp;</td>
                     <td>
                         <a asp-controller="Owner" asp-action="Detail" asp-route-id="@owner.Id">
                         Edit
@@ -42,6 +44,27 @@
                         </a>
                     </td>
                 </tr>
+                if (owner.CarByOwner != null) {
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>Brand</td>
+                            <td>Model</td>
+                            <td>License Plate</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    foreach (var car in owner.CarByOwner)
+                    {
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>@car.Cartype.Brand</td>
+                            <td>@car.Cartype.Model</td>
+                            <td>@car.LicensePlate</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    }
+                }
             }
         </table>
 

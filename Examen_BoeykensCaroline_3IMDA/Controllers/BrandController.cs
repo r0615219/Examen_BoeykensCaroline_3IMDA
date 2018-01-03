@@ -28,7 +28,8 @@ namespace Examen_BoeykensCaroline_3IMDA.Controllers
             {
                 Id = cartype.Id,
                 Brand = cartype.Brand,
-                Model = cartype.Model
+                Model = cartype.Model,
+                CarsByBrand = _brandService.GetAllCarsByBrand(cartype.Model)
             };
         }
 
@@ -96,7 +97,6 @@ namespace Examen_BoeykensCaroline_3IMDA.Controllers
         {
             _brandService.Delete(id);
             return Redirect("/Brand/Brands");
-            //return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Error()

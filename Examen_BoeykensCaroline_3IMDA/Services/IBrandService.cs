@@ -7,6 +7,7 @@ namespace Examen_BoeykensCaroline_3IMDA.Services
     {
         List<Cartype> GetAllTypes();
         Cartype GetTypeById(int id);
+        List<Car> GetAllCarsByBrand(string cartype);
         void Save(Cartype cartype);
         void Delete(int id);
     }

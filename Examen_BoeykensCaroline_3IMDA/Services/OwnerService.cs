@@ -22,6 +22,11 @@ namespace Examen_BoeykensCaroline_3IMDA.Controllers
             return _entityContext.Owners.Include(x => x.Car).ThenInclude(x => x.Car);
         }
 
+        private IIncludableQueryable<Car, Owner> GetFullCars()
+        {
+            return _entityContext.Cars.Include(x => x.Cartype).Include(x => x.Owner).ThenInclude(x => x.Owner);
+        }
+
         public List<Owner> GetAllOwners()
         {
             return GetFullGraph().OrderBy(x => x.Id).ToList();
@@ -30,6 +35,11 @@ namespace Examen_BoeykensCaroline_3IMDA.Controllers
         public Owner GetOwnerById(int id)
         {
             return GetFullGraph().FirstOrDefault(x => x.Id == id);
+        }
+
+        public List<Car> GetAllCarsByOwner(int ownerId)
+        {
+            return GetFullCars().Where(x => x.Owner.Select(y => y.OwnerId).FirstOrDefault() == ownerId).ToList();
         }
 
         public void Save(Owner owner)

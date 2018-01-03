@@ -6,14 +6,15 @@
 <h2>All @ViewData["Title"]</h2>
 <h3>@ViewData["Message"]</h3>
 
-<a asp-controller="Brand" asp-action="New" class="btn btn-primary">New</a>
+<a asp-controller="Brand" asp-action="New" class="btn btn-primary">Add New Brand</a>
+<a asp-controller="Home" asp-action="New" class="btn btn-primary">Add New Car</a>
 
 <div class="row">
     <div class="col-md-12">
         <table class="table">
             <thead>
             <tr>
-                <td>Id</td>
+                <td>&#35;</td>
                 <td>Model</td>
                 <td>Brand</td>
             </tr>
@@ -36,6 +37,27 @@
                         </a>
                     </td>
                 </tr>
+                if (cartype.CarsByBrand != null) {
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>Owner</td>
+                            <td>License Plate</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    foreach (var car in cartype.CarsByBrand)
+                    {
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>@string.Join(";", car.Owner.Select(x => x.Owner.FirstName + " " + x.Owner.LastName))</td>
+                            <td>@car.LicensePlate</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+
+                    }
+                }
+                
             }
         </table>
 

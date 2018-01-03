@@ -7,6 +7,7 @@ namespace Examen_BoeykensCaroline_3IMDA.Services
     {
         List<Owner> GetAllOwners();
         Owner GetOwnerById(int id);
+        List<Car> GetAllCarsByOwner(int ownerId);
         void Save(Owner owner);
         void Delete(int id);
     }
