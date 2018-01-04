@@ -30,7 +30,7 @@ namespace Examen_BoeykensCaroline_3IMDA.Controllers
                 Date = car.Date,
                 LicensePlate = car.LicensePlate,
                 Owner = string.Join(";", car.Owner.Select(x => x.Owner.FirstName + " " + x.Owner.LastName)),
-                Cartype = car.Cartype?.Model,
+                Cartype = car.Cartype?.Model + " (" + car.Cartype?.Brand + ")",
             };
         }
 
@@ -72,7 +72,7 @@ namespace Examen_BoeykensCaroline_3IMDA.Controllers
             var editView = ConvertCarToEditViewModel(car);
             editView.Cartypes = _carService.GetAllTypes().Select(x => new SelectListItem
             {
-                Text = x.Model,
+                Text = x.Model + " (" + x.Brand + ")",
                 Value = x.Id.ToString(),
             }
             ).ToList();
@@ -93,7 +93,7 @@ namespace Examen_BoeykensCaroline_3IMDA.Controllers
                 LicensePlate = null,
                 Cartypes = _carService.GetAllTypes().Select(x => new SelectListItem
                 {
-                    Text = x.Model,
+                    Text = x.Model + " (" + x.Brand + ")",
                     Value = x.Id.ToString(),
                 }).ToList(),
                 Owners = _carService.GetAllOwners().Select(x => new SelectListItem

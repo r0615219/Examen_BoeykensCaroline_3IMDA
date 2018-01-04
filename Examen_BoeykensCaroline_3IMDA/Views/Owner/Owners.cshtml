@@ -11,12 +11,15 @@
 
 <div class="row">
     <div class="col-md-12">
-        <table class="table">
-            <thead>
+        <table style="margin-top: 2em;" class="table">
+            <thead style="color: white; background-color: #333; font-weight: bold">
             <tr>
                 <td>&#35;</td>
                 <td>Firstname</td>
                 <td>Lastname</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
             </tr>
             </thead>
             @foreach (var owner in Model.Owners)
@@ -27,25 +30,25 @@
                   continue;
             }
             
-                <tr>
+                <tr style="background-color: #e6e6e6; font-weight: bold;">
                     <td>@owner.Id</td>
                     <td>@owner.FirstName</td>
                     <td>@owner.LastName</td>
                     <td>&nbsp;</td>
                     <td>
                         <a asp-controller="Owner" asp-action="Detail" asp-route-id="@owner.Id">
-                        Edit
+                            <i class="glyphicon glyphicon-pencil"></i>
                         </a>
                     </td>
                     <td>
                         <a asp-controller="Owner" asp-action="Delete" asp-route-id="@owner.Id"
                            onclick="$.post(this.href).success(window.location.href = '/Owner/Owners');return false; ">
-                            Delete
+                            <i class="glyphicon glyphicon-remove"></i>
                         </a>
                     </td>
                 </tr>
-                if (owner.CarByOwner != null) {
-                        <tr>
+                if (owner.CarByOwner.Count != 0) {
+                        <tr style="background-color: #f7f7f7;">
                             <td>&nbsp;</td>
                             <td>Brand</td>
                             <td>Model</td>
@@ -60,8 +63,17 @@
                             <td>@car.Cartype.Brand</td>
                             <td>@car.Cartype.Model</td>
                             <td>@car.LicensePlate</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
+                            <td>
+                                <a asp-controller="Home" asp-action="Detail" asp-route-id="@car.Id">
+                                    <i class="glyphicon glyphicon-pencil"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <a asp-controller="Home" asp-action="Delete" asp-route-id="@car.Id"
+                                   onclick="$.post(this.href).success(window.location.href = '/Owner/Owners');return false; ">
+                                    <i class="glyphicon glyphicon-remove"></i>
+                                </a>
+                            </td>
                         </tr>
                     }
                 }

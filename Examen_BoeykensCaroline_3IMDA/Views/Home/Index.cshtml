@@ -10,8 +10,8 @@
 
 <div class="row">
     <div class="col-md-12">
-        <table class="table">
-            <thead>
+        <table style="margin-top: 2em;" class="table">
+            <thead style="color: white; background-color: #333; font-weight: bold">
             <tr>
                 <td>&#35;</td>
                 <td>Type</td>
@@ -19,8 +19,11 @@
                 <td>Owner</td>
                 <td>Color</td>
                 <td>Date</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
             </tr>
             </thead>
+            <tbody>
             @foreach (var car in Model.Cars)
             {
                 <tr>
@@ -48,17 +51,18 @@
                     <td>@car.Date.ToLongDateString()</td>
                     <td>
                         <a asp-controller="Home" asp-action="Detail" asp-route-id="@car.Id">
-                        Edit
+                            <i class="glyphicon glyphicon-pencil"></i>
                         </a>
                     </td>
                     <td>
                         <a asp-controller="Home" asp-action="Delete" asp-route-id="@car.Id"
                            onclick="$.post(this.href).success(window.location.href = '/');return false; ">
-                            Delete
+                            <i class="glyphicon glyphicon-remove"></i>
                         </a>
                     </td>
                 </tr>
             }
+            </tbody>
         </table>
 
     </div>
